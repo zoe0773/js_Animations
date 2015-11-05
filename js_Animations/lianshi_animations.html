@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>链式动画--回调函数</title>
+	<style type="text/css">
+		body,ul,li{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		ul li{
+			width: 200px;
+			height: 100px;
+			background: yellow;
+			margin-bottom: 20px;
+			border: 4px red solid;
+			filter: alpha(opacity:30);/*ie*/
+			opacity: 0.3;/*其它浏览器*/
+		}
+	</style>
+	<script src="move.js" type="text/javascript" charset="utf-8" ></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var Li = document.getElementById("li1");
+			Li.onmouseover = function(){
+				startMove(Li,"width",400,function(){  //回调函数--改变高度
+					startMove(Li,"height",300,function(){//回调函数--改变透明度
+						startMove(Li,"opacity",100);
+					});
+				});
+			};
+			Li.onmouseout = function(){
+				startMove(Li,"opacity",30,function(){
+					startMove(Li,"height",100,function(){
+						startMove(Li,"width",200);
+					});
+				});
+			};
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li id="li1"></li>
+	</ul>
+</body>
+</html>

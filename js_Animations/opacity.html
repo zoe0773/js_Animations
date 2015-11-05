@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>透明度</title>
+	<style type="text/css" media="screen">
+		body,div,span{
+			margin: 0;
+			padding: 0;
+		}	
+		#div1{
+			width: 200px;
+			height: 200px;
+			background: red;
+			/*position: relative;
+			left: -200px;
+			top: 0;*/
+			filter: alpha(opacity:30);
+			opacity:0.3;
+		}
+		#div1 span{
+			width: 20px;
+			height: 50px;
+			background: yellow;
+			position: absolute;
+			left: 200px;
+			top: 75px;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var mydiv = document.getElementById("div1");
+		mydiv.onmouseover = function(){
+			startMove(100);		
+		}
+		mydiv.onmouseout = function(){
+			startMove(30);
+		}
+	}
+	var timer = null,
+		alpha = 30;//透明度
+	function startMove(iAlpha){
+		clearInterval(timer);//调用这个函数的时候先清除之前定时器的行为以防定时器叠加
+		var mydiv = document.getElementById("div1");
+		timer = setInterval(function(){
+				var sp = 0;//透明度增大/减小值
+				if(alpha>iAlpha){
+					sp = -10;
+				}else{
+					sp = 10;
+				}
+				if (alpha == iAlpha) { //div left -200px
+					clearInterval(timer);
+				}else{
+					alpha +=sp;
+					mydiv.style.filter = "alpha(opacity:"+alpha+")";//IE
+					mydiv.style.opacity = alpha/100;//其它浏览器透明度（opacity的值在0到1之间）
+				}			
+		}, 50)
+	}
+	</script>
+</head>
+<body>	
+	<div id="div1"><span id="share">分享</span></div>
+</body>
+</html>

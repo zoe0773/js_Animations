@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>多物体透明度</title>
+	<style type="text/css" media="screen">
+		body,div,span{
+			margin: 0;
+			padding: 0;
+		}	
+		div{
+			width: 200px;
+			height: 200px;
+			background: red;
+			margin: 10px;
+			float: left;
+			filter: alpha(opacity:30);
+			opacity:0.3;
+		}
+		#div1 span{
+			width: 20px;
+			height: 50px;
+			background: yellow;
+			position: absolute;
+			left: 200px;
+			top: 75px;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var mydiv = document.getElementsByTagName("div");
+		for (var i = 0,len = mydiv.length; i < len; i++) {
+			mydiv[i].timer = null;
+			mydiv[i].alpha = 30;//每一个本身的透明度
+			mydiv[i].onmouseover = function(){
+				startMove(this,100);		
+			}
+			mydiv[i].onmouseout = function(){
+				startMove(this,30);
+			}
+		}
+		
+	}
+	
+	function startMove(obj,iAlpha){
+		clearInterval(obj.timer);//清除之前定时器的行为以防定时器叠加
+		obj.timer = setInterval(function(){
+				var sp = 0;//透明度增大/减小值
+				if(obj.alpha>iAlpha){
+					sp = -10;
+				}else{
+					sp = 10;
+				}
+				if (obj.alpha == iAlpha) { //div left -200px
+					clearInterval(obj.timer);
+				}else{
+					obj.alpha +=sp;
+					obj.style.filter = "obj.alpha(opacity:"+obj.alpha+")";//IE
+					obj.style.opacity = obj.alpha/100;//其它浏览器透明度（opacity的值在0到1之间）
+				}			
+		}, 50)
+	}
+	</script>
+</head>
+<body>	
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+	<div id="div4"></div>
+</body>
+</html>

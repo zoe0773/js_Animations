@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>速度</title>
+	<style type="text/css" media="screen">
+		body,div,span{
+			margin: 0;
+			padding: 0;
+		}	
+		#div1{
+			width: 200px;
+			height: 200px;
+			background: red;
+			position: relative;
+			left: -200px;
+			top: 0;
+		}
+		#div1 span{
+			width: 20px;
+			height: 50px;
+			background: yellow;
+			position: absolute;
+			left: 200px;
+			top: 75px;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var mydiv = document.getElementById("div1");
+		mydiv.onmouseover = function(){
+			startMove(0);		
+		}
+		mydiv.onmouseout = function(){
+			startMove(-200);
+		}
+	}
+	var timer = null;
+	function startMove(itarget){
+		clearInterval(timer);//调用这个函数的时候先清除之前定时器的行为以防定时器叠加
+		var mydiv = document.getElementById("div1");
+		timer = setInterval(function(){
+				var speed = 0;					
+				if(mydiv.offsetLeft>itarget){
+					speed = -10;
+				}else{
+					speed = 10;
+				}
+				if (mydiv.offsetLeft ==itarget) { //div left -200px
+					clearInterval(timer);
+				}else{
+					mydiv.style.left = mydiv.offsetLeft+speed+"px";
+				}			
+		}, 50);
+	}
+	</script>
+</head>
+<body>	
+	<div id="div1"><span id="share">分享</span></div>
+</body>
+</html>

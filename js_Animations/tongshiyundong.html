@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>同时运动</title>
+	<style type="text/css">
+		body,ul,li{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		ul li{
+			width: 200px;
+			height: 100px;
+			background: yellow;
+			margin-bottom: 20px;
+			border: 4px red solid;
+			filter: alpha(opacity:30);/*ie*/
+			opacity: 0.3;/*其它浏览器*/
+		}
+	</style>
+	<script src="script/move.js" type="text/javascript" charset="utf-8" ></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var myli = document.getElementById("li1");
+
+			myli.onmouseover = function(){
+				startMove(myli,{width:400,height:200,opacity:100});
+			}
+			myli.onmouseout = function(){
+				startMove(myli,{width:200,height:100,opacity:30});
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li id="li1"></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>任意属性——透明度</title>
+	<style type="text/css">
+		body,ul,li{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		ul li{
+			width: 200px;
+			height: 100px;
+			background: yellow;
+			margin-bottom: 20px;
+			border: 4px red solid;
+			filter: alpha(opacity:30);/*ie*/
+			opacity: 0.3;/*其它浏览器*/
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		
+		var li1 = document.getElementById("li1");		
+
+		li1.onmouseover = function(){
+			startMove(this,"opacity",100);
+		};
+		li1.onmouseout = function(){
+			startMove(this,"opacity",30);
+		};		
+	}
+	//获取属性 offsetWidth/Height有小bug
+		function getStyle(obj, attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr]; //IE支持的
+				}else{
+					return getComputedStyle(obj,false)[attr];//FF浏览器支持的
+				}
+			}
+	function startMove(obj,attr,itarget){
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			var icur = 0;
+			if (attr == "opacity") {
+				icur = Math.round( parseFloat(getStyle(obj,attr)*100));
+			} else{
+				icur = parseInt(getStyle(obj,attr));//parseint函数解析字符串并取整
+			}
+			
+			var speed = (itarget-icur)/8;
+			speed = speed>0 ? Math.ceil(speed) :Math.floor(speed);//如果大于零向上取整，否则向下取整
+			if (icur ==itarget) {
+				clearInterval(obj.timer);
+			} else{
+				if (attr == "opacity") {
+					obj.style.filter = "alpha(opacity:"+(icur+speed)+")";
+					obj.style.opacity = (icur+speed)/100;
+				} else{
+					obj.style[attr] = icur + speed +"px"; 
+				}				
+			}
+		}, 30);
+	}
+	</script>
+</head>
+<body>
+	<ul>
+		<li id="li1"></li>
+	</ul>
+</body>
+</html>

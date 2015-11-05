@@ -1,0 +1,34 @@
+运动框架：
+	1.速度（改变值：left、right、width、height、opacity）
+		a.setInterval();设置定时器
+		b.透明动画：
+
+	2.缓冲运动
+		speed :取整；
+		Math.ceil()向上取整
+		Math.floor()向下取整
+
+	3.多物体运动
+		offsetWidth/Height的bug
+			加border padding时会有小的bug。
+
+		解决这个问题：获取样式：obj.style.width------两个方法：1.针对IE浏览器currentStyle
+		2.getComputedStyle针对FF浏览器
+			function getStyle(obj, attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj,false)[attr];
+				}
+			}
+
+
+	4.任意值运动
+		封装任意属性的函数move.js
+
+	5.链式运动
+	 	利用回调函数实现链式运动效果
+
+	6.同时运动
+
+	json:{名值对} 多个名值对用逗号,隔开  利用json传入多个属性值对来达到多个运动同时进行

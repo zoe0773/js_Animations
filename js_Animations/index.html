@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS动画案例</title>
+	<style type="text/css">
+		body,div,i,img,a,p{
+			margin: 0;
+			padding: 0;
+		}
+		#move{
+			width: 300px;
+			background: #E7E7EA;
+			margin: 10px auto;
+			border: 1px solid #ccc;
+		}
+		#move a{
+			position: relative;
+			display: inline-block;
+			width: 58px;
+			height: 25px;
+			border: 1px solid #ddd;
+			border-radius: 3px;
+			background-color: #fff;
+			text-align: center;
+			margin: 10px 17px;
+			padding-top: 40px;
+			color: #9c9c9c;
+			font-size: 12px;
+			text-decoration: none;
+			line-height: 25px;
+			overflow: hidden;
+		}
+		#move a i{
+			position: absolute;
+			top: 10px;
+			left: 0;
+			display: inline-block;
+			width: 100%;
+			text-align: center;
+			filter: alpha(opactiy=100);
+			opacity: 1;
+		}
+		#move a:hover{
+			color: #f00;
+		}
+		#move img{
+			border: none;
+		}
+	</style>
+	<!--<script src="./script/move.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#move a').mouseenter(function(){
+			$(this).find('i').animate({top:"-20px",opacity:"0"},150,function(){
+				$(this).css({top:"30px"});
+				$(this).animate({top:"10px",opacity:"1"}, 100);
+			})
+		})
+	})
+	/**window.onload = function(){
+		var mymove = document.getElementById("move"),
+			alist = mymove.getElementsByTagName("a");
+		for (var i = 0,len = alist.length; i <len ; i++) {
+			alist[i].onmouseover = function(){
+				
+				var ts = this.getElementsByTagName("i")[0];
+				startMove(ts, {top:-20,opacity:0},function(){
+					ts.style.top = 20+"px";
+					startMove(ts,{top:10,opacity:100});
+				})
+			}
+		}
+
+	}*/
+	</script>
+</head>
+<body>
+	<div id="move">
+		<a href="#"><i><img src="./images/cw.png" /></i><p>宠物</p></a>
+		<a href="#"><i><img src="images/sm.png" /></i><p>数码</p></a>
+		<a href="#"><i><img src="images/jiaju.png" /></i><p>家居</p></a>
+		<a href="#"><i><img src="images/ss.png" /></i><p>时尚</p></a>
+		<a href="#"><i><img src="images/sy.png" /></i><p>摄影</p></a>
+		<a href="#"><i><img src="images/dy.png" /></i><p>电影</p></a>
+	</div>
+</body>
+</html>
